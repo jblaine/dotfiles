@@ -1,3 +1,4 @@
+
 " --------------------------- Basic Sane Settings -----------------------
 " Use VIM mode, not old vi mode
 set nocompatible
@@ -39,11 +40,14 @@ if has("gui_running")
 endif
 
 " --------------------------- Coloring -----------------------------------
+" Force 256 colors
+set t_Co=256
 " Enable syntax highlighting
 syntax enable
 " Highlight text past 80 columns
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
+colorscheme molokai
 
 " ------------------------ Normal Mode mappings --------------------------
 " # = insert "#" at col 0, enter normal mode again, go down one line
