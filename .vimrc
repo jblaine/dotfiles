@@ -1,6 +1,11 @@
+" -------------- Use a terminal definition with colors ------------------
+" let os = substitute(system('uname'), "\n", "", "")
+" if os == "SunOS"
+"     set term=
+" endif
 
 " --------------------------- Basic Sane Settings -----------------------
-" Use VIM mode, not old vi mode
+" Don't try to be compatible with old-school vi
 set nocompatible
 " Shift operations set to 4 spaces
 set shiftwidth=4
@@ -21,14 +26,14 @@ set softtabstop=4
 set laststatus=2
 
 " ------------------------ Status Line ------------------------------------
-:set statusline=%f          " Path to the file
-:set statusline+=\ -\       " Separator
-:set statusline+=FileType:  " Label
-:set statusline+=%y         " Filetype of the file
-:set statusline+=%=       " Switch to the right side
-:set statusline+=%4l        " Current line
-:set statusline+=/          " Separator
-:set statusline+=%-40L        " Total lines
+set statusline=%f          " Path to the file
+set statusline+=\ -\       " Separator
+set statusline+=FileType:  " Label
+set statusline+=%y         " Filetype of the file
+set statusline+=%=       " Switch to the right side
+set statusline+=%4l        " Current line
+set statusline+=/          " Separator
+set statusline+=%-40L        " Total lines
 
 " ------------------------ gvim-Specific Settings -------------------------
 if has("gui_running")
@@ -40,7 +45,8 @@ if has("gui_running")
 endif
 
 " --------------------------- Coloring -----------------------------------
-" Force 256 colors
+" It is assumed above that you have set term to a terminal type supporting
+" 256 colors, so force it here.
 set t_Co=256
 " Enable syntax highlighting
 syntax enable

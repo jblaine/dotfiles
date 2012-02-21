@@ -9,18 +9,22 @@ if [ -f ${HOME}/.bashrc ]; then
 	. ${HOME}/.bashrc
 fi
 
-HISTSIZE=200
+# Append to existing history file instead of overwriting
+shopt -s histappend
+# Make multi-line commands fit on one line
+shopt -s cmdhist
+# Allow many entries
+HISTSIZE=2000
+# Ignore duplicate commands (ignoredups) and also ignore
+# any commands that begin with whitespace.
+HISTCONTROL='ignoredups:ignorespace'
+# Ignore common crap
+HISTIGNORE='ls:bg:fg:history'
 
 # Ignore files with the suffixes .o and ~ when doing file-completion
-# FIGNORE='.o'
-FIGNORE=''
+FIGNORE=".o:~"
 
 alias ls='ls -CF'
-
-OS=`uname -s`
-if [ $OS = "SunOS" ]; then
-    export TERM=sun-color
-fi
 
 EDITOR=vi
 VISUAL=vi
@@ -39,6 +43,8 @@ done
 MANPATH=${MANPATH}:${HOME}/man
 
 PS1="\W:\h> "
+
+export GREP_OPTIONS='--color=auto'
 
 if [ $AT_WORK -eq 1 ]; then
     . ${HOME}/.bash_profile_work
