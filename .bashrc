@@ -11,7 +11,7 @@ fi
 PATH=${HOME}/bin:${PATH}
 
 if [ $AT_WORK -eq 1 ]; then
-    PATH=${PATH}:${HOME}/mylocal/bin:/afs/rcf/admin/local/bin:/afs/rcf/admin/bin:/afs/rcf/admin/utils/vect/bin:/afs/rcf/admin/utils/ats/bin
+    PATH=${HOME}/mylocal/bin:${PATH}:/afs/rcf/admin/local/bin:/afs/rcf/admin/bin:/afs/rcf/admin/utils/vect/bin:/afs/rcf/admin/utils/ats/bin
 fi
 
 if [ $OSTYPE = "linux-gnu" ]; then

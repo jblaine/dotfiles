@@ -46,7 +46,9 @@ endif
 
 " --------------------------- Coloring -----------------------------------
 " It is assumed above that you have set term to a terminal type supporting
-" 256 colors, so force it here.
+" 256 colors, so force it here.  "People" say this should never be required
+" if your terminfo crap is correct, but it is required for me when running
+" vim under GNU screen
 set t_Co=256
 " Enable syntax highlighting
 syntax enable
@@ -54,6 +56,11 @@ syntax enable
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
 colorscheme molokai
+" Dunno, this seems to be the only thing that leaves my terminal in a
+" proper state once I exit vim in 256-color mode when using either
+" TERM=putty-256color or TERM=xterm-256color.  Found it mentioned in
+" some IRC log after digging through Google results for an hour or more.
+set t_ti= t_te=
 
 " ------------------------ Normal Mode mappings --------------------------
 " # = insert "#" at col 0, enter normal mode again, go down one line
