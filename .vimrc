@@ -1,9 +1,3 @@
-" -------------- Use a terminal definition with colors ------------------
-" let os = substitute(system('uname'), "\n", "", "")
-" if os == "SunOS"
-"     set term=
-" endif
-
 " --------------------------- Basic Sane Settings -----------------------
 " Don't try to be compatible with old-school vi
 set nocompatible
