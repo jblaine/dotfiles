@@ -49,7 +49,7 @@ syntax enable
 " Highlight text past 80 columns
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
-colorscheme molokai
+colorscheme lucius
 " Dunno, this seems to be the only thing that leaves my terminal in a
 " proper state once I exit vim in 256-color mode when using either
 " TERM=putty-256color or TERM=xterm-256color.  Found it mentioned in
