@@ -17,7 +17,7 @@ set softtabstop=4
 " See :help mapleader 
 :let mapleader=","
 " Always show the status line
-set laststatus=2
+" set laststatus=2
 
 " ------------------------ Status Line ------------------------------------
 set statusline=%f          " Path to the file
