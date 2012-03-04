@@ -14,17 +14,27 @@ shopt -s histappend
 # Make multi-line commands fit on one line
 shopt -s cmdhist
 # Allow many entries
-HISTSIZE=2000
+export HISTSIZE=2000
 # Ignore duplicate commands (ignoredups) and also ignore
 # any commands that begin with whitespace.
-HISTCONTROL='ignoredups:ignorespace'
+export HISTCONTROL='ignoredups:ignorespace'
 # Ignore common crap
-HISTIGNORE='ls:bg:fg:history'
+export HISTIGNORE='ls:bg:fg:history'
 
 # Ignore files with the suffixes .o and ~ when doing file-completion
 FIGNORE=".o:~"
 
-alias ls='ls -CF'
+# Use ls coloring where available
+unalias ls > /dev/null 2>&1
+ls --color /tmp > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+    alias ls='ls --color=auto -CF'
+    export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
+    # This probably is allowed as well then
+    export GREP_OPTIONS='--color=auto'
+else
+    alias ls='ls -CF'
+fi
 
 EDITOR=vi
 VISUAL=vi
@@ -44,7 +54,13 @@ MANPATH=${MANPATH}:${HOME}/man
 
 PS1="\W:\h> "
 
-export GREP_OPTIONS='--color=auto'
+# Check $STY to see if we are in a shell under screen and act
+# accordingly.
+if [ "$STY"x = "x" ]; then
+    export TERM=xterm
+else
+    export TERM=screen-256color
+fi
 
 if [ $AT_WORK -eq 1 ]; then
     . ${HOME}/.bash_profile_work
