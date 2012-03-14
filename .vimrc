@@ -16,18 +16,28 @@ set softtabstop=4
 " set smarttab
 " See :help mapleader 
 :let mapleader=","
-" Always show the status line
-" set laststatus=2
+set showmatch                       " Show me matching close braces
+set matchpairs+=<:>                 " match < > with the % command, too
+set backspace=indent,eol            " allow rational backspacing in insert mode
+" Commented out until I understand it
+" set formatoptions=tcrqn
+set comments=b:#                    " Most of my files use # for comments
 
 " ------------------------ Status Line ------------------------------------
 set statusline=%f          " Path to the file
 set statusline+=\ -\       " Separator
 set statusline+=FileType:  " Label
 set statusline+=%y         " Filetype of the file
-set statusline+=%=       " Switch to the right side
+set statusline+=%=         " Switch to the right side
 set statusline+=%4l        " Current line
 set statusline+=/          " Separator
-set statusline+=%-40L        " Total lines
+set statusline+=%-40L      " Total lines
+" Always show the status line
+set laststatus=2
+" Show me where I am in the file (only useful w/o status line set)
+" set ruler
+" Show me the vi command in the ruler
+" set showcmd
 
 " ------------------------ gvim-Specific Settings -------------------------
 if has("gui_running")
@@ -49,7 +59,9 @@ syntax enable
 " Highlight text past 80 columns
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
-colorscheme lucius
+" colorscheme lucius
+colorscheme desert256-jls
+"
 " Dunno, this seems to be the only thing that leaves my terminal in a
 " proper state once I exit vim in 256-color mode when using either
 " TERM=putty-256color or TERM=xterm-256color.  Found it mentioned in

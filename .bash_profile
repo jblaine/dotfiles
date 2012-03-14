@@ -57,7 +57,7 @@ PS1="\W:\h> "
 # Check $STY to see if we are in a shell under screen and act
 # accordingly.
 if [ "$STY"x = "x" ]; then
-    export TERM=xterm
+    export TERM=xterm-256color
 else
     export TERM=screen-256color
 fi
