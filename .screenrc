@@ -44,3 +44,4 @@ hardstatus alwayslastline "%{= wk} %-Lw%{=b YK} %n%f %t %{-}%+Lw %=%{= dd}"
 screen 0
 screen -t ADMIN 1
 screen 2
+screen -t STATUS 9

@@ -22,6 +22,8 @@ set backspace=indent,eol            " allow rational backspacing in insert mode
 " Commented out until I understand it
 " set formatoptions=tcrqn
 set comments=b:#                    " Most of my files use # for comments
+" Highlight column 80
+set colorcolumn=80
 
 " ------------------------ Status Line ------------------------------------
 set statusline=%f          " Path to the file
