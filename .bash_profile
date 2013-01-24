@@ -56,11 +56,11 @@ PS1="\W:\h> "
 
 # Check $STY to see if we are in a shell under screen and act
 # accordingly.
-if [ "$STY"x = "x" ]; then
-    export TERM=xterm-256color
-else
-    export TERM=screen-256color
-fi
+#if [ "$STY"x = "x" ]; then
+#    export TERM=xterm-256color
+#else
+#    export TERM=screen-256color
+#fi
 
 if [ $AT_WORK -eq 1 ]; then
     . ${HOME}/.bash_profile_work

@@ -5,6 +5,16 @@ set nocompatible
 set shiftwidth=4
 " Preserve indention level from the previous line
 set smartindent
+set autoindent
+"No stupid outdent for scripting comments...
+inoremap # X<C-H>#
+"And no stupid shift-resistance either...
+nnoremap <silent> >> :call ShiftLine()<CR>
+function! ShiftLine()
+    set nosmartindent
+    normal! >>
+    set smartindent
+endfunction
 " Auto-wrap once typing past 80 characters
 " set textwidth=80
 " Always turn Tab into spaces
@@ -22,8 +32,12 @@ set backspace=indent,eol            " allow rational backspacing in insert mode
 " Commented out until I understand it
 " set formatoptions=tcrqn
 set comments=b:#                    " Most of my files use # for comments
-" Highlight column 80
-set colorcolumn=80
+" Highlight column 80 in VIM 7.3+
+if v:version >= 703
+    set colorcolumn=80
+endif
+" I do not like my search results highlighted
+set nohlsearch
 
 " ------------------------ Status Line ------------------------------------
 set statusline=%f          " Path to the file
@@ -31,12 +45,15 @@ set statusline+=\ -\       " Separator
 set statusline+=FileType:  " Label
 set statusline+=%y         " Filetype of the file
 set statusline+=%=         " Switch to the right side
+set statusline+=\row:      " Label
 set statusline+=%4l        " Current line
 set statusline+=/          " Separator
-set statusline+=%-40L      " Total lines
+set statusline+=%L         " Total lines
+set statusline+=\ col:     " Label
+set statusline+=%-3c      " Column
 " Always show the status line
 set laststatus=2
-" Show me where I am in the file (only useful w/o status line set)
+" Show me where I am in the file (only useful w/o statusline set)
 " set ruler
 " Show me the vi command in the ruler
 " set showcmd
@@ -62,7 +79,7 @@ syntax enable
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
 " colorscheme lucius
-colorscheme desert256-jls
+" colorscheme desert256-jls
 "
 " Dunno, this seems to be the only thing that leaves my terminal in a
 " proper state once I exit vim in 256-color mode when using either
@@ -75,6 +92,7 @@ set t_ti= t_te=
 :nnoremap # I#<esc>j
 " Quote the word you're on with double quotes
 :nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+:nnoremap <SPACE> <PAGEDOWN>
 
 " ------------------------ Insert Mode mappings --------------------------
 

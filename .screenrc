@@ -7,7 +7,7 @@ defscrollback 2000
 shell -/usr/rcf/bin/bash
 #
 # Force a terminal type for screens.
-term "screen-256color"
+term "putty-256color"
 #
 # Force all new screens to start in home directory
 chdir
@@ -42,6 +42,6 @@ hardstatus alwayslastline "%{= wk} %-Lw%{=b YK} %n%f %t %{-}%+Lw %=%{= dd}"
 # Start my screens
 # For reference, syntax is: screen [opts] [n] [cmd [args]]
 screen 0
-screen -t ADMIN 1
+screen -t ADMIN 1 ssh cairo
 screen 2
 screen -t STATUS 9
