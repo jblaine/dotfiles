@@ -78,8 +78,6 @@ syntax enable
 " Highlight text past 80 columns
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
-" colorscheme lucius
-" colorscheme desert256-jls
 "
 " Dunno, this seems to be the only thing that leaves my terminal in a
 " proper state once I exit vim in 256-color mode when using either
