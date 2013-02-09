@@ -1,0 +1,16 @@
+[core]
+	editor = vi
+	autocrlf = input
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = auto
+[merge]
+    summary=true
+[alias]
+    co = checkout
+    cob = checkout -b
+    unstage = reset HEAD
+    uncommit = reset --soft HEAD^
