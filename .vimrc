@@ -6,8 +6,8 @@ syntax enable
 highlight OverLength ctermbg=red ctermfg=white
 match OverLength /\%81v.\+/
 
-" Shift operations set to 4 spaces
-set shiftwidth=4
+" Shift operations set to 2 spaces
+set shiftwidth=2
 " Preserve indention level from the previous line
 set smartindent
 set autoindent
@@ -22,9 +22,9 @@ function! ShiftLine()
 endfunction
 " Always turn Tab into spaces
 set expandtab
-" A tab counts for 4 spaces
-set tabstop=4
-set softtabstop=4
+" A tab counts for 2 spaces
+set tabstop=2
+set softtabstop=2
 " See :help mapleader
 :let mapleader=","
 set showmatch                       " Show me matching close braces

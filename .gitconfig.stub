@@ -1,16 +1,19 @@
 [core]
-	editor = vi
-	autocrlf = input
+  editor = vi
+  autocrlf = input
 [color]
-    diff = auto
-    status = auto
-    branch = auto
-    interactive = auto
-    ui = auto
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = auto
 [merge]
-    summary=true
+  summary=true
 [alias]
-    co = checkout
-    cob = checkout -b
-    unstage = reset HEAD
-    uncommit = reset --soft HEAD^
+  b = branch -v
+  r = remote -v
+  t = tag -l
+  co = checkout
+  cob = checkout -b
+  unstage = reset HEAD
+  uncommit = reset --soft HEAD^
