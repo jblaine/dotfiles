@@ -36,7 +36,7 @@ else
   alias ls='ls -CF'
 fi
 
-if [ `uname -n` = "Linux" ]; then
+if [ `uname -s` = "Linux" ]; then
   export PS_FORMAT='user,pid,ppid,pcpu,pmem,args'
   alias ps='ps -ewwH'
 fi
