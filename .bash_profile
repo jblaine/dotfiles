@@ -24,6 +24,10 @@ export HISTIGNORE='ls:bg:fg:history'
 # Ignore files with the suffixes .o and ~ when doing file-completion
 FIGNORE=".o:~"
 
+if [ "$TERM"x = "cygwinx" ]; then
+    alias more=less
+fi
+
 ls --color /tmp > /dev/null 2>&1
 if [ $? -eq 0 ]; then
     alias ls='ls --color=auto -CF'
