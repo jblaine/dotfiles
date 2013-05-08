@@ -41,6 +41,9 @@ if [ `uname -s` = "Linux" ]; then
   alias ps='ps -ewwH'
 fi
 
+export LESS='--quit-at-eof --quit-if-one-screen --status-column --long-prompt'
+alias more=less
+
 EDITOR=vi
 VISUAL=vi
 # If we find vim, use it.
