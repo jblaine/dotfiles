@@ -24,15 +24,9 @@ export HISTIGNORE='ls:bg:fg:history'
 # Ignore files with the suffixes .o and ~ when doing file-completion
 FIGNORE=".o:~"
 
-# Does our TERM have colors?
-which tput > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-  _COLORS=`tput -T$TERM colors`
-else
-  _COLORS=1
-fi
-
-if [ ${_COLORS} -ge 8 ]; then
+# If we have tput, our TERM allows more than 8 colors, and ls supports
+# the '--colors' option, use coloring for stuff.
+if which tput > /dev/null 2>&1 && [[ $(tput -T$TERM colors) -ge 8 ]]; then
   # Here we use 'ls' as the global decider. If ls supports
   # colors, we assume the rest of the other commands in the
   # environment support colors as well.
