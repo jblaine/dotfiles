@@ -24,21 +24,32 @@ export HISTIGNORE='ls:bg:fg:history'
 # Ignore files with the suffixes .o and ~ when doing file-completion
 FIGNORE=".o:~"
 
-if [ "$TERM"x = "cygwinx" ]; then
-    alias more=less
+# Does our TERM have colors?
+which tput > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+  _COLORS=`tput -T$TERM colors`
+else
+  _COLORS=1
 fi
 
-ls --color /tmp > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-    alias ls='ls --color=auto -CF'
+if [ ${_COLORS} -ge 8 ]; then
+  # Here we use 'ls' as the global decider. If ls supports
+  # colors, we assume the rest of the other commands in the
+  # environment support colors as well.
+  if ls --color /tmp > /dev/null 2>&1; then
+    # Color support! Good for all but cygwinx, I've found.
     if [ "$TERM"x != "cygwinx" ]; then
-        alias ls='ls --color=auto -CF'
-        export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
-        # This probably is allowed as well then
-        export GREP_OPTIONS='--color=auto'
+      alias more='less -r'
+      export GREP_OPTIONS='--color=auto'
+      alias ls='ls --color=auto -CF'
+      export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
     fi
+  fi
 else
-    alias ls='ls -CF'
+  # Boooringggg
+  alias ls='ls -CF'
+  alias more='less'
+  unset GREP_OPTIONS
 fi
 
 if [ `uname -s` = "Linux" ]; then
@@ -46,15 +57,17 @@ if [ `uname -s` = "Linux" ]; then
   alias ps='ps -ewwH'
 fi
 
-export LESS='--quit-at-eof --quit-if-one-screen --status-column --long-prompt'
-alias more=less
+export LESS='--long-prompt'
+
+MANPATH=${MANPATH}:${HOME}/man
+PS1="\W:\h> "
 
 EDITOR=vi
 VISUAL=vi
 # If we find vim, use it.
-for vdir in /usr/bin /bin /usr/rcf/bin
+for bindir in /usr/bin /bin /usr/rcf/bin
 do
-  if [ -x $vdir/vim ]; then
+  if [ -x $bindir/vim ]; then
     alias vi=vim
     EDITOR=vim
     VISUAL=vim
@@ -63,9 +76,12 @@ do
   fi
 done
 
-MANPATH=${MANPATH}:${HOME}/man
-
-PS1="\W:\h> "
+# Git aliases
+alias gst='git status'
+alias gca='git commit -a'
+alias gc='git commit'
+alias gb='git branch'
+alias ga='git add'
 
 if [ $AT_WORK -eq 1 ]; then
   . ${HOME}/.bash_profile_work

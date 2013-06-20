@@ -2,11 +2,7 @@
   editor = vi
   autocrlf = input
 [color]
-  diff = auto
-  status = auto
-  branch = auto
-  interactive = auto
-  ui = auto
+  ui = true
 [merge]
   summary=true
 [alias]
