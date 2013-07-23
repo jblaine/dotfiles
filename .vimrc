@@ -1,5 +1,10 @@
 execute pathogen#infect()
 
+" Do not store stupid persistent undo files
+if has('persistent_undo')
+  set noundofile
+endif
+
 " Enable syntax highlighting
 syntax enable
 " Highlight text past 80 columns
