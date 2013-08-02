@@ -41,7 +41,8 @@ hardstatus alwayslastline "%{= wk} %-Lw%{=b YK} %n%f %t %{-}%+Lw %=%{= dd}"
 #
 # Start my screens
 # For reference, syntax is: screen [opts] [n] [cmd [args]]
-screen 0
+screen -t CHEF-WORK 0 ssh rcf-linux-beta
 screen -t ADMIN 1 ssh cairo
-screen 2
-screen -t STATUS 9
+screen -t CM-MASTER 2 ssh rcf-cm-master
+screen -t SENTINEL 3 ssh -l root sentinel-fed18
+screen -t STATUS 9 s
