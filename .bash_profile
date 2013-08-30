@@ -80,6 +80,10 @@ alias gc='git commit'
 alias gb='git branch'
 alias ga='git add'
 
+if [ -f "$HOME/liquidprompt/liquidprompt" ]; then
+  source "$HOME/liquidprompt/liquidprompt"
+fi
+
 # Yes, we do this again.
 if [ $AT_WORK -eq 1 ]; then
   . ${HOME}/.bash_profile_work
