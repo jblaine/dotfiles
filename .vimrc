@@ -39,6 +39,10 @@ set comments=b:#                    " Most of my files use # for comments
 " Don't highlight search results
 set nohlsearch
 
+:filetype plugin on
+
+autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
+
 " ------------------------ Status Line ------------------------------------
 set statusline=%f          " Path to the file
 set statusline+=\ -\       " Separator
