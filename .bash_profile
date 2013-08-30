@@ -81,7 +81,11 @@ alias gb='git branch'
 alias ga='git add'
 
 if [ -f "$HOME/liquidprompt/liquidprompt" ]; then
-  source "$HOME/liquidprompt/liquidprompt"
+  # Work Solaris boxes with homedir in AFS are too slow
+  # for all of this background prompt-tweaking hoo-ha
+  if [ `uname -s` != "SunOS" ]; then
+    source "$HOME/liquidprompt/liquidprompt"
+  fi
 fi
 
 # Yes, we do this again.
