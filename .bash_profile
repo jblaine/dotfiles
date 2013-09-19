@@ -13,6 +13,8 @@ if [ -f ${HOME}/.bashrc ]; then
 	. ${HOME}/.bashrc
 fi
 
+# Disable bash processing of Ctrl-S (flow control)
+stty -ixon
 # Append to existing history file instead of overwriting
 shopt -s histappend
 # Make multi-line commands fit on one line

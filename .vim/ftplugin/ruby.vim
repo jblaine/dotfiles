@@ -9,7 +9,7 @@ let g:rubycomplete_classes_in_global = 1
 
 " set the 'foldmethod' option to 'syntax' and allow folding of
 " classes, modules, methods, code blocks, heredocs and comments.
-let ruby_fold = 1
+" let ruby_fold = 1
 
 " Gary Bernhardt's hashrocket
 inoremap <c-l> <space>=><space>
