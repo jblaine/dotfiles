@@ -90,6 +90,8 @@ if [ -f "$HOME/liquidprompt/liquidprompt" ]; then
   fi
 fi
 
+complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
+
 # Yes, we do this again.
 if [ $AT_WORK -eq 1 ]; then
   . ${HOME}/.bash_profile_work
