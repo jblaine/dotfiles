@@ -92,6 +92,22 @@ fi
 
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 
+COLS="$(tput cols)"
+if (( COLS <= 0 )) ; then
+  COLS="${COLUMNS:-80}"
+fi
+hr() {
+  local WORD="$1"
+  if [[ -n "$WORD" ]] ; then
+    local LINE=''
+    while (( ${#LINE} < COLS ))
+    do
+        LINE="$LINE$WORD"
+    done
+    echo "${LINE:0:$COLS}"
+  fi
+}
+
 # Yes, we do this again.
 if [ $AT_WORK -eq 1 ]; then
   . ${HOME}/.bash_profile_work
