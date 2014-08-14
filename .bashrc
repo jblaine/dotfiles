@@ -15,7 +15,11 @@ fi
 PATH=${HOME}/bin:${PATH}
 
 if [ $AT_WORK -eq 1 ]; then
-  PATH=${HOME}/mylocal/bin:${HOME}/.gem/ruby/1.9.1/bin:${PATH}:/afs/rcf/admin/local/bin:/afs/rcf/admin/bin:/afs/rcf/admin/utils/vect/bin:/afs/rcf/admin/utils/ats/bin
+  PATH=${HOME}/mylocal/bin:${PATH}:/afs/rcf/admin/local/bin:/afs/rcf/admin/bin:/afs/rcf/admin/utils/vect/bin:/afs/rcf/admin/utils/ats/bin
+fi
+
+if [ -d /opt/chefdk ]; then
+  PATH=/opt/chefdk/bin:$PATH
 fi
 
 if [ $OSTYPE = "linux-gnu" ]; then
