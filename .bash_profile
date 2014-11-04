@@ -66,7 +66,7 @@ VISUAL=vi
 # If we find vim, use it.
 for bindir in /usr/bin /bin /usr/rcf/bin
 do
-  if [ -x $bindir/vim ]; then
+  if [ -f $bindir/vim ]; then
     alias vi=vim
     EDITOR=vim
     VISUAL=vim
