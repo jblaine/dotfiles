@@ -27,6 +27,8 @@ export HISTCONTROL='ignoredups:ignorespace'
 # Ignore common crap
 export HISTIGNORE='ls:bg:fg:history'
 
+export LC_ALL=en_US.UTF-8
+
 # Ignore files with the suffixes .o and ~ when doing file-completion
 FIGNORE=".o:~"
 
@@ -81,6 +83,10 @@ alias gca='git commit -a'
 alias gc='git commit'
 alias gb='git branch'
 alias ga='git add'
+
+# Chef aliases
+alias knife='echo use k!; \knife'
+alias k='\knife'
 
 if [ -f "$HOME/liquidprompt/liquidprompt" ]; then
   # Work Solaris boxes with homedir in AFS are too slow

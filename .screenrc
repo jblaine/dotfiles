@@ -45,3 +45,4 @@ screen -t Chef 0
 screen -t AFS-Admin 1 ssh cairo
 screen -t cm-master 2 ssh rcf-cm-master
 screen -t General
+screen -t DMZ ssh dmz-command

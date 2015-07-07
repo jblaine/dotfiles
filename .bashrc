@@ -18,7 +18,9 @@ if [ $AT_WORK -eq 1 ]; then
   PATH=${HOME}/mylocal/bin:${PATH}:/afs/rcf/admin/local/bin:/afs/rcf/admin/bin:/afs/rcf/admin/utils/vect/bin:/afs/rcf/admin/utils/ats/bin
 fi
 
-if [ -d /opt/chefdk ]; then
+if [ -d /afs/rcf/user/jblaine/.gem/ruby/2.1.0/bin ]; then
+  PATH=/afs/rcf/user/jblaine/.gem/ruby/2.1.0/bin:$PATH
+elif [ -d /opt/chefdk ]; then
   PATH=/opt/chefdk/bin:$PATH
 fi
 
