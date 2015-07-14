@@ -79,10 +79,12 @@ done
 
 # Git aliases
 alias gst='git status'
-alias gca='git commit -a'
 alias gc='git commit'
+alias gca='git commit -a'
 alias gb='git branch'
 alias ga='git add'
+alias gp='git push'
+alias gl='git log'
 
 # Chef aliases
 alias knife='echo use k!; \knife'
