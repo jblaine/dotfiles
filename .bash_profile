@@ -116,6 +116,23 @@ hr() {
   fi
 }
 
+vault_singleitem () {
+  if [ "$1"x = "x" ]; then
+    echo "Usage: vault_singleitem <key>"
+    echo ""
+    echo "Spits out a JSON key (argument) and value (from stdin) for"
+    echo "use in chef-vault"
+    echo ""
+    echo "Hit Ctrl-D twice (for some reason) to end your input if typing"
+    echo "or pasting to stdin."
+    echo ""
+    echo "Example: vault_singleitem deploy-key < deploy.pem > deploy.json"
+    echo ""
+  else
+    ruby -rjson -e "puts JSON.generate({\"$1\" => STDIN.read()})"
+  fi
+}
+
 # Yes, we do this again.
 if [ $AT_WORK -eq 1 ]; then
   . ${HOME}/.bash_profile_work
