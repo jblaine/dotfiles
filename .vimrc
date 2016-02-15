@@ -8,8 +8,8 @@ endif
 " Enable syntax highlighting
 syntax enable
 " Highlight text past 80 columns
-highlight OverLength ctermbg=red ctermfg=white
-match OverLength /\%81v.\+/
+" highlight OverLength ctermbg=red ctermfg=white
+" match OverLength /\%81v.\+/
 
 " Shift operations set to 2 spaces
 set shiftwidth=2
@@ -44,16 +44,24 @@ set nohlsearch
 autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
 
 " ------------------------ Status Line ------------------------------------
-set statusline=%f          " Path to the file
-set statusline+=\ -\       " Separator
-set statusline+=FileType:  " Label
-set statusline+=%y         " Filetype of the file
-set statusline+=%=         " Switch to the right side
-set statusline+=\row:      " Label
-set statusline+=%4l        " Current line
-set statusline+=/          " Separator
-set statusline+=%L         " Total lines
-set statusline+=\ col:     " Label
-set statusline+=%-3c      " Column
+" set statusline=%f          " Path to the file
+" set statusline+=\ -\       " Separator
+" set statusline+=FileType:  " Label
+" set statusline+=%y         " Filetype of the file
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+" set statusline+=%=         " Switch to the right side
+" set statusline+=\row:      " Label
+" set statusline+=%4l        " Current line
+" set statusline+=/          " Separator
+" set statusline+=%L         " Total lines
+" set statusline+=\ col:     " Label
+" set statusline+=%-3c      " Column
 " Always show the status line
 set laststatus=2
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

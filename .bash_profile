@@ -94,7 +94,9 @@ if [ -f "$HOME/liquidprompt/liquidprompt" ]; then
   # Work Solaris boxes with homedir in AFS are too slow
   # for all of this background prompt-tweaking hoo-ha
   if [ `uname -s` != "SunOS" ]; then
-    source "$HOME/liquidprompt/liquidprompt"
+    if ! [ -d /mtcnas ]; then
+      source "$HOME/liquidprompt/liquidprompt"
+    fi
   fi
 fi
 
@@ -131,6 +133,37 @@ vault_singleitem () {
   else
     ruby -rjson -e "puts JSON.generate({\"$1\" => STDIN.read()})"
   fi
+}
+
+watch_repodir () {
+  if [ -d $1 -a -d $1/.git ]; then
+    grep -E "^$1\$" $HOME/.repowatchlist > /dev/null 2>&1 \
+      || (echo "$1" >> $HOME/.repowatchlist && echo "Now watching $1")
+  else
+    echo "$1 is not a directory or is not a git repository"
+  fi
+}
+
+unwatch_repodir () {
+  # Sed proved to be a PITA
+  grep -v -E "^${repo}$" $HOME/.repowatchlist > $HOME/.repowatchlist.tmp \
+    && mv $HOME/.repowatchlist.tmp $HOME/.repowatchlist
+}
+
+find_uncommitted () {
+  if ! [ -f $HOME/.repowatchlist ]; then
+    echo "$HOME/.repowatchlist has no repositories to examine."
+    return 0
+  fi
+  for i in `cat $HOME/.repowatchlist`
+  do
+    if ! [ -d $i -a -d $i/.git ]; then
+      echo "$i not a directory or not a git repository, skipping"
+      continue
+    else
+      (cd $i; git status | grep Changes > /dev/null 2>&1 && echo $i)
+    fi
+  done
 }
 
 # Yes, we do this again.
