@@ -14,7 +14,9 @@ if [ -f ${HOME}/.bashrc ]; then
 fi
 
 # Disable bash processing of Ctrl-S (flow control)
-stty -ixon
+if `which stty > /dev/null 2>&1`; then
+  stty -ixon
+fi
 # Append to existing history file instead of overwriting
 shopt -s histappend
 # Make multi-line commands fit on one line
@@ -38,17 +40,19 @@ unset GREP_OPTIONS
 
 # If we have tput, our TERM allows more than 8 colors, and ls supports
 # the '--colors' option, use coloring for stuff.
-if which tput > /dev/null 2>&1 && [[ $(tput -T$TERM colors) -ge 8 ]]; then
-  # Here we use 'ls' as the global decider. If ls supports
-  # colors, we assume the rest of the other commands in the
-  # environment support colors as well.
-  if ls --color /tmp > /dev/null 2>&1; then
-    # Color support! Good for all but cygwinx, I've found.
-    if [ "$TERM"x != "cygwinx" ]; then
-      alias more='less -r'
-      export GREP_OPTIONS='--color=auto'
-      alias ls='ls --color=auto -CF'
-      export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
+if `which tput > /dev/null 2>&1`; then
+  if [[ $(tput -T$TERM colors) -ge 8 ]]; then
+    # Here we use 'ls' as the global decider. If ls supports
+    # colors, we assume the rest of the other commands in the
+    # environment support colors as well.
+    if ls --color /tmp > /dev/null 2>&1; then
+      # Color support! Good for all but cygwinx, I've found.
+      if [ "$TERM"x != "cygwinx" ]; then
+        alias more='less -r'
+        export GREP_OPTIONS='--color=auto'
+        alias ls='ls --color=auto -CF'
+        export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
+      fi
     fi
   fi
 fi
@@ -95,28 +99,14 @@ if [ -f "$HOME/liquidprompt/liquidprompt" ]; then
   # for all of this background prompt-tweaking hoo-ha
   if [ `uname -s` != "SunOS" ]; then
     if ! [ -d /mtcnas ]; then
-      source "$HOME/liquidprompt/liquidprompt"
+      if ! `uname -s | grep MING > /dev/null 2>&1`; then
+        source "$HOME/liquidprompt/liquidprompt"
+      fi
     fi
   fi
 fi
 
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
-
-COLS="$(tput cols)"
-if (( COLS <= 0 )) ; then
-  COLS="${COLUMNS:-80}"
-fi
-hr() {
-  local WORD="$1"
-  if [[ -n "$WORD" ]] ; then
-    local LINE=''
-    while (( ${#LINE} < COLS ))
-    do
-        LINE="$LINE$WORD"
-    done
-    echo "${LINE:0:$COLS}"
-  fi
-}
 
 vault_singleitem () {
   if [ "$1"x = "x" ]; then
