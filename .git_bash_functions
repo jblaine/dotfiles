@@ -1,0 +1,54 @@
+watch_repodir () {
+  if [ -d $1 -a -d $1/.git ]; then
+    grep -E "^$1\$" $HOME/.repowatchlist > /dev/null 2>&1 \
+      || (echo "$1" >> $HOME/.repowatchlist && echo "Now watching $1")
+  else
+    echo "$1 is not a directory or is not a git repository"
+  fi
+}
+
+unwatch_repodir () {
+  # Sed proved to be a PITA
+  grep -v -E "^${repo}$" $HOME/.repowatchlist > $HOME/.repowatchlist.tmp \
+    && mv $HOME/.repowatchlist.tmp $HOME/.repowatchlist
+}
+
+find_uncommitted () {
+  if [ "$1"x = "--helpx" ]; then
+    echo "Usage: find_uncommitted [--debug]"
+    echo
+    echo "$HOME/.repowatchlist should contain a list of git repositories"
+    echo "(one path per line) to be checked for uncommitted changes."
+    return
+  fi
+  if [ "$1"x = "--debugx" ]; then
+    local DEBUG=1
+  else
+    local DEBUG=0
+  fi
+  if ! [ -f $HOME/.repowatchlist ]; then
+    echo "$HOME/.repowatchlist has no repositories to examine."
+    return 0
+  else
+    if [ $DEBUG -eq 1 ]; then
+      echo Watchlist:
+      cat $HOME/.repowatchlist
+    fi
+  fi
+  for i in `cat $HOME/.repowatchlist`
+  do
+    if [ $DEBUG -eq 1 ]; then
+      echo "Working on $i"
+    fi
+    if ! [ -d $i -a -d $i/.git ]; then
+      echo "$i not a directory or not a git repository, skipping"
+      continue
+    else
+      if [ $DEBUG -eq 1 ]; then
+        (cd $i; git status)
+      else
+        (cd $i; git status --short | (grep -E '^.+' > /dev/null 2>&1 && echo $i))
+      fi
+    fi
+  done
+}

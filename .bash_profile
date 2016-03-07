@@ -1,4 +1,4 @@
-if [ -f /afs/rcf/admin/init/system.profile ]; then
+if [ -e /afs/rcf/admin/init/system.profile ]; then
   . /afs/rcf/admin/init/system.profile
   AT_WORK=1
 else
@@ -9,7 +9,7 @@ if [ $AT_WORK -eq 1 ]; then
   . ${HOME}/.bash_profile_work
 fi
 
-if [ -f ${HOME}/.bashrc ]; then
+if [ -e ${HOME}/.bashrc ]; then
 	. ${HOME}/.bashrc
 fi
 
@@ -125,36 +125,9 @@ vault_singleitem () {
   fi
 }
 
-watch_repodir () {
-  if [ -d $1 -a -d $1/.git ]; then
-    grep -E "^$1\$" $HOME/.repowatchlist > /dev/null 2>&1 \
-      || (echo "$1" >> $HOME/.repowatchlist && echo "Now watching $1")
-  else
-    echo "$1 is not a directory or is not a git repository"
-  fi
-}
-
-unwatch_repodir () {
-  # Sed proved to be a PITA
-  grep -v -E "^${repo}$" $HOME/.repowatchlist > $HOME/.repowatchlist.tmp \
-    && mv $HOME/.repowatchlist.tmp $HOME/.repowatchlist
-}
-
-find_uncommitted () {
-  if ! [ -f $HOME/.repowatchlist ]; then
-    echo "$HOME/.repowatchlist has no repositories to examine."
-    return 0
-  fi
-  for i in `cat $HOME/.repowatchlist`
-  do
-    if ! [ -d $i -a -d $i/.git ]; then
-      echo "$i not a directory or not a git repository, skipping"
-      continue
-    else
-      (cd $i; git status | grep Changes > /dev/null 2>&1 && echo $i)
-    fi
-  done
-}
+if [ -e $HOME/.git_bash_functions ]; then
+  source $HOME/.git_bash_functions
+fi
 
 # Yes, we do this again.
 if [ $AT_WORK -eq 1 ]; then
