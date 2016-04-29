@@ -61,6 +61,7 @@ set statusline+=%*
 " Always show the status line
 set laststatus=2
 
+" Syntastic recommended settings. Statusline settings for it above
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -164,7 +165,3 @@ let g:ctrlp_cmd = 'CtrlP'
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar,*.tar.gz
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|svn)$'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|svn)$',
-  \ 'file': '\v\.(so|dll)$',
-  \ }
