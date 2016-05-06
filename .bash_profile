@@ -6,11 +6,15 @@ else
 fi
 
 if [ $AT_WORK -eq 1 ]; then
-  . ${HOME}/.bash_profile_work
+  . ~/.bash_profile_work
 fi
 
-if [ -e ${HOME}/.bashrc ]; then
-	. ${HOME}/.bashrc
+if [ -e ~/.bashrc ]; then
+	. ~/.bashrc
+fi
+
+if [ -e ~/.dir_colors ]; then
+  eval `dircolors .dir_colors`
 fi
 
 # Disable bash processing of Ctrl-S (flow control)
@@ -49,7 +53,7 @@ if `which tput > /dev/null 2>&1`; then
       # Color support! Good for all but cygwinx, I've found.
       if [ "$TERM"x != "cygwinx" ]; then
         alias more='less -r'
-        export GREP_OPTIONS='--color=auto'
+        alias grep='\grep --color=auto'
         alias ls='ls --color=auto -CF'
         export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
       fi
@@ -64,7 +68,7 @@ fi
 
 export LESS='--long-prompt'
 
-MANPATH=${MANPATH}:${HOME}/man
+MANPATH=${MANPATH}:~/man
 PS1="\W:\h> "
 
 EDITOR=vi
@@ -76,7 +80,7 @@ do
     alias vi=vim
     EDITOR=vim
     VISUAL=vim
-    VIMHOME=$HOME/.vim
+    VIMHOME=~/.vim
     break
   fi
 done
@@ -94,13 +98,13 @@ alias gl='git log'
 alias knife='echo use k!; \knife'
 alias k='\knife'
 
-if [ -f "$HOME/liquidprompt/liquidprompt" ]; then
+if [ -f "~/liquidprompt/liquidprompt" ]; then
   # Work Solaris boxes with homedir in AFS are too slow
   # for all of this background prompt-tweaking hoo-ha
   if [ `uname -s` != "SunOS" ]; then
     if ! [ -d /mtcnas ]; then
       if ! `uname -s | grep MING > /dev/null 2>&1`; then
-        source "$HOME/liquidprompt/liquidprompt"
+        source "~/liquidprompt/liquidprompt"
       fi
     fi
   fi
@@ -125,11 +129,11 @@ vault_singleitem () {
   fi
 }
 
-if [ -e $HOME/.git_bash_functions ]; then
-  source $HOME/.git_bash_functions
+if [ -e ~/.git_bash_functions ]; then
+  source ~/.git_bash_functions
 fi
 
 # Yes, we do this again.
 if [ $AT_WORK -eq 1 ]; then
-  . ${HOME}/.bash_profile_work
+  . ~/.bash_profile_work
 fi
