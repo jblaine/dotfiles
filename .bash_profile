@@ -13,10 +13,6 @@ if [ -e ~/.bashrc ]; then
 	. ~/.bashrc
 fi
 
-if [ -e ~/.dir_colors ]; then
-  eval `dircolors .dir_colors`
-fi
-
 # Disable bash processing of Ctrl-S (flow control)
 if `which stty > /dev/null 2>&1`; then
   stty -ixon
@@ -131,6 +127,11 @@ vault_singleitem () {
 
 if [ -e ~/.git_bash_functions ]; then
   source ~/.git_bash_functions
+fi
+
+if [ -e $HOME/.dir_colors ]; then
+  unset LS_COLORS
+  eval "$(dircolors $HOME/.dir_colors)"
 fi
 
 # Yes, we do this again.
