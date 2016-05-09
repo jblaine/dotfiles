@@ -8,6 +8,7 @@ watch_repodir () {
 }
 
 unwatch_repodir () {
+  repo=$1
   # Sed proved to be a PITA
   grep -v -E "^${repo}$" $HOME/.repowatchlist > $HOME/.repowatchlist.tmp \
     && mv $HOME/.repowatchlist.tmp $HOME/.repowatchlist
