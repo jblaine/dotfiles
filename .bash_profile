@@ -94,16 +94,18 @@ alias gl='git log'
 alias knife='echo use k!; \knife'
 alias k='\knife'
 
-if [ -f "~/liquidprompt/liquidprompt" ]; then
+if [ -f ~/liquidprompt/liquidprompt ]; then
   # Work Solaris boxes with homedir in AFS are too slow
   # for all of this background prompt-tweaking hoo-ha
   if [ `uname -s` != "SunOS" ]; then
     if ! [ -d /mtcnas ]; then
       if ! `uname -s | grep MING > /dev/null 2>&1`; then
-        source "~/liquidprompt/liquidprompt"
+        source ~/liquidprompt/liquidprompt
       fi
     fi
   fi
+else
+  echo "Not a file: ~/liquidprompt/liquidprompt"
 fi
 
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
