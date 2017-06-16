@@ -19,6 +19,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'dougireton/vim-chef'
 " Plugin 'xolox/vim-misc'
 Plugin 'ctrlpvim/ctrlp.vim'
 
