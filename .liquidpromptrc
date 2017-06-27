@@ -121,7 +121,7 @@ LP_TIME_ANALOG=0
 LP_ENABLE_TITLE=0
 
 # Enable Title for screen and byobu
-LP_ENABLE_SCREEN_TITLE=0
+LP_ENABLE_SCREEN_TITLE=1
 
 # Use differents colors for differents hosts you SSH in
 LP_ENABLE_SSH_COLORS=0
@@ -134,4 +134,5 @@ LP_ENABLE_RUNTIME=0
 
 LP_ENABLE_SCLS=1
 
+LP_MARK_DEFAULT='►'
 # vim: set et sts=4 sw=4 tw=120 ft=sh:
