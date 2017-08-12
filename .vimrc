@@ -5,8 +5,9 @@ if has("gui_running")
   " set guifont=Source_Code_Pro_for_Powerline:h12
   " set guifont=DejaVu_Sans_Mono_for_Powerline:h12
   set lines=44 columns=120 linespace=0
-  set encoding=utf-8
 endif
+
+set encoding=utf-8
 
 " vundle boilerplate
 filetype off
@@ -22,6 +23,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'dougireton/vim-chef'
 " Plugin 'xolox/vim-misc'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ryanoasis/vim-devicons'
 
 " ----- Working with Git ----------------------------------------------
 Plugin 'tpope/vim-fugitive'

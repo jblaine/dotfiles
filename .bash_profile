@@ -89,6 +89,7 @@ alias gb='git branch'
 alias ga='git add'
 alias gp='git push'
 alias gl='git log'
+alias gg='git log --oneline --abbrev-commit --decorate --all --graph --date=relative  --pretty=format:"%C(bold blue)%h%Cred%d %Creset%s"'
 
 # Chef aliases
 alias knife='echo use k!; \knife'
