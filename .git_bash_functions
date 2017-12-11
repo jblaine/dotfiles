@@ -1,13 +1,20 @@
 watch_repodir () {
-  if [ -d $1 -a -d $1/.git ]; then
-    grep -E "^$1\$" $HOME/.repowatchlist > /dev/null 2>&1 \
-      || (echo "$1" >> $HOME/.repowatchlist && echo "Now watching $1")
+  local WATCHDIR
+  if [ "$1x" = "x" ]; then
+    WATCHDIR="$(pwd)"
   else
-    echo "$1 is not a directory or is not a git repository"
+    WATCHDIR="$1"
+  fi
+  if [ -d "$WATCHDIR" -a -d "$WATCHDIR"/.git ]; then
+    grep -E "^$WATCHDIR\$" $HOME/.repowatchlist > /dev/null 2>&1 \
+      || (echo "$WATCHDIR" >> $HOME/.repowatchlist && echo "Now watching $WATCHDIR")
+  else
+    echo "$WATCHDIR is not a directory or is not a git repository"
   fi
 }
 
 unwatch_repodir () {
+  local repo
   repo=$1
   # Sed proved to be a PITA
   grep -v -E "^${repo}$" $HOME/.repowatchlist > $HOME/.repowatchlist.tmp \

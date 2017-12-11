@@ -6,7 +6,7 @@ idle 1800 lockscreen
 defscrollback 2000
 #
 # Um, use this shell, as a login shell ('-')
-shell -/usr/rcf/bin/bash
+shell -/bin/bash
 #
 # Force a terminal type for screens.
 term "putty-256color"
