@@ -1,16 +1,20 @@
+# The following stops shellcheck from trying to read and check files
+# referenced via '.' or 'source'
+# shellcheck source=/dev/null
+
 if [ -e /etc/r701-shell-init/system.profile ]; then
-  . /etc/r701-shell-init/system.profile
+  source /etc/r701-shell-init/system.profile
   AT_WORK=1
 else
   AT_WORK=0
 fi
 
 if [ $AT_WORK -eq 1 ]; then
-  . "$HOME/.bash_profile_work"
+  source "$HOME/.bash_profile_work"
 fi
 
 if [ -e "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+	source "$HOME/.bashrc"
 fi
 
 # Disable bash processing of Ctrl-S (flow control)
@@ -34,7 +38,7 @@ export LC_ALL=en_US.UTF-8
 # Ignore files with the suffixes .o and ~ when doing file-completion
 FIGNORE=".o:~"
 
-alias ls='ls -CF'
+alias ls='ls -CF --group-directories-first'
 alias more='less'
 unset GREP_OPTIONS
 
@@ -57,7 +61,7 @@ if which tput > /dev/null 2>&1; then
   fi
 fi
 
-if [ `uname -s` = "Linux" ]; then
+if [ "$(uname -s)" = "Linux" ]; then
   export PS_FORMAT='user,pid,ppid,pcpu,pmem,args'
   alias ps='ps -ewwH'
 fi
@@ -65,18 +69,18 @@ fi
 export LESS='--long-prompt'
 
 MANPATH=${MANPATH}:~/man
-PS1="\W:\h> "
+PS1='\W:\h> '
 
-EDITOR="vi"
-VISUAL="vi"
+export EDITOR="vi"
+export VISUAL="vi"
 # If we find vim, use it.
-for bindir in /usr/bin /bin /usr/rcf/bin
+for bindir in /usr/bin /bin
 do
   if [ -f $bindir/vim ]; then
     alias vi=vim
-    EDITOR="vim"
-    VISUAL="vim"
-    VIMHOME="$HOME/.vim"
+    export EDITOR="vim"
+    export VISUAL="vim"
+    export VIMHOME="$HOME/.vim"
     break
   fi
 done
@@ -95,7 +99,7 @@ alias gg='git log --oneline --abbrev-commit --decorate --all --graph --date=rela
 alias knife='echo use k!; \knife'
 alias k='\knife'
 
-if [ -f ~/liquidprompt/liquidprompt ]; then
+if [ -f "$HOME/liquidprompt/liquidprompt" ]; then
   if ! [ -d /mtcnas ]; then
     if ! uname -s | grep MING > /dev/null 2>&1; then
       source "$HOME/liquidprompt/liquidprompt"
@@ -133,5 +137,5 @@ fi
 
 # Yes, we do this again.
 if [ $AT_WORK -eq 1 ]; then
-  . "$HOME/.bash_profile_work"
+  source "$HOME/.bash_profile_work"
 fi

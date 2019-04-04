@@ -2,8 +2,8 @@ startup_message "off"
 #
 idle 1800 lockscreen
 #
-# Give 2000 lines of scrollback buffer
-defscrollback 2000
+# Give lots of scrollback buffer
+defscrollback 4000
 #
 # Um, use this shell, as a login shell ('-')
 shell -/bin/bash
@@ -44,3 +44,4 @@ hardstatus alwayslastline "%{= wk} %-Lw%{=b YK} %n%f %t %{-}%+Lw %=%{= dd}"
 # Start my screens
 # For reference, syntax is: screen [opts] [n] [cmd [args]]
 screen -t Chef 0
+screen -t MADMIN 1 /usr/bin/ssh m26560@gazoo
