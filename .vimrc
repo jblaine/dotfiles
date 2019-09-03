@@ -101,7 +101,7 @@ set comments=b:#                    " Most of my files use # for comments
 " Don't highlight search results
 set nohlsearch
 set ruler
-set number
+set nonumber
 set showcmd
 
 " We need this for plugins like Syntastic
